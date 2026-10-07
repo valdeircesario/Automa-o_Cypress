@@ -1,21 +1,29 @@
 # 📦 Cypress Automation Lab
 
-> Projeto de estudo e referência em automação de testes com Cypress, organizado com boas práticas de manutenção, documentação e escalabilidade.
+<div align="center">
 
-## 🌟 Visão geral
+![Cypress](https://img.shields.io/badge/Cypress-E2E%20Automation-17202A?style=for-the-badge&logo=cypress)
+![Node.js](https://img.shields.io/badge/Node.js-20.x-339933?style=for-the-badge&logo=node.js)
+![npm](https://img.shields.io/badge/npm-10.x-CB3837?style=for-the-badge&logo=npm)
+![ESLint](https://img.shields.io/badge/ESLint-10.x-4B32C3?style=for-the-badge&logo=eslint)
 
-Este repositório foi estruturado para servir como base sólida para aprendizagem e desenvolvimento de automação E2E com Cypress, seguindo padrões profissionais como POM, fixtures, custom commands, organização por módulos e documentação técnica.
+</div>
 
-Ele foi pensado para ser:
+> Projeto de estudo, referência e base profissional para automação de testes com Cypress, organizado para manter clareza, escalabilidade e qualidade técnica.
 
-- um laboratório de estudo
-- uma referência para outras pessoas
-- uma base reutilizável para projetos maiores
-- um projeto organizado e legível para manutenção futura
+## ✨ Visão geral
+
+Este repositório foi estruturado para funcionar como um laboratório de aprendizado e como um modelo de referência para automação E2E com Cypress. A organização prioriza boas práticas como:
+
+- separação de responsabilidades
+- reutilização de código
+- dados centralizados em fixtures
+- testes legíveis e fáceis de manter
+- documentação clara para evolução do projeto
 
 ---
 
-## 🧱 Estrutura do projeto
+## 🏗️ Estrutura do projeto
 
 ```text
 projetocypressteste01/
@@ -53,16 +61,17 @@ projetocypressteste01/
 ├── 📄 eslint.config.js                   # Configuração do ESLint
 ├── 📄 package.json                       # Metadados e scripts do projeto
 ├── 📄 package-lock.json                  # Lock file das dependências
-├── 📄 .env.example                      # Exemplo de variáveis de ambiente
-├── 📄 .gitignore                        # Arquivos ignorados pelo Git
-├── 📄 README.md                         # Documentação principal
-├── 📄 PROJECT_SUMMARY.md                # Resumo do projeto
-└── 📄 LICENSE                           # Licença do projeto
+├── 📄 .env.example                       # Exemplo de variáveis de ambiente
+├── 📄 .gitignore                         # Arquivos ignorados pelo Git
+├── 📄 README.md                          # Documentação principal
+├── 📄 PROJECT_SUMMARY.md                 # Resumo do projeto
+├── 📄 QUICK_START.md                     # Guia rápido de uso
+└── 📄 LICENSE                            # Licença do projeto
 ```
 
 ---
 
-## 📊 Estatísticas do projeto
+## 📊 Estatísticas
 
 | Item                         | Valor                               |
 | ---------------------------- | ----------------------------------- |
@@ -70,7 +79,7 @@ projetocypressteste01/
 | Diretórios                   | 11                                  |
 | Pacotes npm instalados       | 258                                 |
 | Vulnerabilidades             | 0                                   |
-| Erros de ESLint              | 0                                   |
+| Erros do ESLint              | 0                                   |
 | Casos de teste implementados | 5                                   |
 | Padrões adotados             | POM, AAA, Fixtures, Custom Commands |
 
@@ -78,25 +87,25 @@ projetocypressteste01/
 
 ## 🧪 Casos de teste implementados
 
-- CTN-001: Login com credenciais válidas
-- CTN-002: Login com senha inválida
-- CTN-003: Login com usuário inexistente
-- CTN-004: Login sem preencher usuário
-- CTN-005: Login sem preencher senha
+- CTN-001 — Login com credenciais válidas
+- CTN-002 — Login com senha inválida
+- CTN-003 — Login com usuário inexistente
+- CTN-004 — Login sem preencher usuário
+- CTN-005 — Login sem preencher senha
 
 ---
 
-## 🛠️ Stack tecnológica
+## 🧰 Stack tecnológica
 
 - Cypress v15.21.1 — framework de automação E2E
 - Node.js v20.13.1 — runtime da aplicação
 - npm v10.5.2 — gerenciador de pacotes
-- ESLint v10.9.1 — qualidade e padronização do código
-- Mochawesome v8.0.1 — geração de relatórios de execução
+- ESLint v10.9.1 — qualidade de código
+- Mochawesome v8.0.1 — geração de relatórios
 
 ---
 
-## 📋 Scripts disponíveis
+## ⚙️ Scripts disponíveis
 
 ```bash
 npm test
@@ -113,29 +122,29 @@ npm run lint:fix
 ### Descrição dos scripts
 
 - `npm test` — executa todos os testes em modo headless
-- `npm run cypress:open` — abre a interface do Cypress
+- `npm run cypress:open` — abre a interface gráfica do Cypress
 - `npm run test:headed` — executa os testes com navegador visível
 - `npm run test:chrome` — executa apenas em Chrome
 - `npm run test:firefox` — executa apenas em Firefox
 - `npm run test:edge` — executa apenas em Edge
 - `npm run test:login` — executa apenas os testes de login
-- `npm run lint` — valida a qualidade do código com ESLint
-- `npm run lint:fix` — corrige automaticamente problemas do ESLint
+- `npm run lint` — valida a qualidade do código
+- `npm run lint:fix` — corrige problemas automaticamente
 
 ---
 
-## ✨ Práticas e padrões adotados
+## 💡 Práticas e padrões adotados
 
 - ✅ Page Object Model (POM) para encapsular a interface
-- ✅ Fixtures para centralização de dados de teste
+- ✅ Fixtures para centralizar dados de teste
 - ✅ Custom Commands para reutilização de ações recorrentes
 - ✅ Padrão AAA (Arrange, Act, Assert)
-- ✅ Geração dinâmica de dados para cenários variáveis
-- ✅ Tratamento de erros e validação consistente
+- ✅ Dados dinâmicos para cenários mais flexíveis
+- ✅ Tratamento de erros e validações consistentes
 - ✅ Captura de screenshots em falhas
 - ✅ Relatórios HTML/JSON com Mochawesome
-- ✅ Validação de código com ESLint
-- ✅ Estrutura pronta para controle com Git
+- ✅ ESLint para padronização e qualidade
+- ✅ Estrutura organizada para versionamento e evolução
 
 ---
 
@@ -145,30 +154,30 @@ npm run lint:fix
    - arquitetura detalhada
    - guia de instalação
    - explicação dos padrões adotados
-   - exemplos de uso
+   - exemplos de aplicação
 
 2. `docs/estrategia-de-testes.md`
-   - estratégia geral de automação
+   - planejamento e estratégia de testes
    - seletores prioritários
    - boas práticas de assertivas
    - expectativas de desempenho
 
 3. `docs/padrao-de-nomenclatura.md`
-   - convenções CT-XXX e CTN-XXX
-   - padronização de variáveis e funções
-   - formato de commits e organização de artefatos
+   - convenções CT-XXX / CTN-XXX
+   - padronização de nomes e funções
+   - organização de artefatos e commits
 
 4. `docs/arquitetura.md`
    - visão em camadas da solução
    - diagramas e dependências
-   - padrões de escalabilidade e manutenção
+   - padrões de manutenção e escalabilidade
 
 ---
 
 ## 🚀 Próximos passos
 
 1. Ajustar URLs e dados de teste para o ambiente real da aplicação
-2. Personalizar seletores com `data-testid` conforme o HTML final
+2. Customizar seletores com `data-testid` conforme o HTML final
 3. Expandir para outros módulos, como usuários, produtos e checkout
 4. Integrar a automação em pipeline de CI/CD
 5. Configurar ambientes de staging e produção
@@ -177,9 +186,9 @@ npm run lint:fix
 
 ## 📝 Observação final
 
-Este projeto está pronto para ser usado como base de estudo, aprendizado e referência para automação de testes com Cypress. Ele foi estruturado para demonstrar boas práticas de organização, manutenção e qualidade, além de servir como ponto de partida para projetos mais robustos e profissionais.
+Este projeto está pronto para servir como base de estudo, referência técnica e ponto de partida para automação E2E com Cypress. Ele foi estruturado para demonstrar boas práticas de organização, manutenção e qualidade, além de facilitar a expansão para projetos mais robustos e profissionais.
 
-A arquitetura adotada favorece clareza, reutilização e expansão contínua, tornando o código mais compreensível tanto para quem está começando quanto para quem precisa evoluir a automação em novos cenários.
+A arquitetura escolhida favorece clareza, reutilização e evolução contínua, tornando o projeto mais compreensível tanto para iniciantes quanto para profissionais que desejam reutilizar a estrutura em cenários reais.
 
 ---
 
@@ -191,8 +200,15 @@ A arquitetura adotada favorece clareza, reutilização e expansão contínua, to
 - Casos de teste executáveis: ✓
 - Base pronta para evolução: ✓
 
+---
+
+<div align="center">
+
+<strong>Projeto criado com sucesso ✨</strong>
+
+</div>
+
 ========================================
-Projeto criado com sucesso! ✨
 ESLint validation: PASSOU ✓
 Estrutura: COMPLETA ✓
 Documentação: ABRANGENTE ✓

@@ -1,12 +1,21 @@
 # 🚀 Quick Start
 
-> Guia rápido para configurar, executar e evoluir o projeto de automação Cypress com eficiência.
+<div align="center">
+
+![Cypress](https://img.shields.io/badge/Cypress-15.x-17202A?style=for-the-badge&logo=cypress)
+![Node.js](https://img.shields.io/badge/Node.js-20.x-339933?style=for-the-badge&logo=node.js)
+![npm](https://img.shields.io/badge/npm-10.x-CB3837?style=for-the-badge&logo=npm)
+![QA](https://img.shields.io/badge/Focus-E2E%20Automation-0A84FF?style=for-the-badge)
+
+</div>
+
+> Guia rápido para configurar, executar e evoluir este projeto com eficiência, organização e qualidade profissional.
 
 ## 1. Visão geral
 
 Este projeto foi estruturado para servir como base de estudo, referência e evolução em automação E2E com Cypress. Ele já inclui organização por módulos, Page Object Model, fixtures, comandos reutilizáveis e documentação técnica.
 
-Antes de começar, confirme que o ambiente já está preparado:
+Antes de começar, confirme que o ambiente está preparado:
 
 - Node.js v20+
 - npm v10+
@@ -21,7 +30,7 @@ node -v
 npm -v
 ```
 
-Se estiver tudo correto, siga para a próxima etapa.
+Se tudo estiver correto, siga para a próxima etapa.
 
 ---
 
@@ -98,13 +107,13 @@ npm run test:login
 
 ## 5. Validação de código
 
-Antes de continuar ou enviar alterações, valide a qualidade do código:
+Antes de enviar alterações ou evoluir a automação, valide a qualidade do código:
 
 ```bash
 npm run lint
 ```
 
-Se quiser corrigir automaticamente problemas simples:
+Se quiser corrigir problemas simples automaticamente:
 
 ```bash
 npm run lint:fix
@@ -257,6 +266,65 @@ get usuarioInput() {
 ## 11. Troubleshooting
 
 ### Erro: "Can't find spec file"
+
+- confira o caminho do arquivo
+- verifique a extensão `.cy.js`
+- confirme que o arquivo está em `cypress/e2e`
+
+### Erro: "Element not found"
+
+- valide o seletor no navegador
+- use o Cypress UI para inspecionar o elemento
+- verifique se o componente está visível antes da ação
+
+### Erro: "Credentials invalid"
+
+- revise o arquivo `.env`
+- confirme os valores em `cypress/fixtures`
+- teste o login manualmente na aplicação
+
+### Testes lentos
+
+- ajuste timeouts em `cypress.config.js`
+- use esperas mais assertivas com `should()`
+- evite uso excessivo de waits manuais
+
+---
+
+## 12. Dúvidas frequentes
+
+**Como depurar um teste?**  
+Use `cy.pause()` ou o modo step-by-step no Cypress UI.
+
+**Como capturar screenshot?**  
+Use `cy.screenshot('nome-do-arquivo')` ou deixe o Cypress capturar automaticamente em falhas.
+
+**Como usar dados dinâmicos?**  
+Consulte `cypress/utils/helpers.js` para helpers e geração de dados.
+
+**Como executar em CI/CD?**  
+Use o comando `npm test` no pipeline da sua ferramenta de integração contínua.
+
+---
+
+## 13. Recursos úteis
+
+- [Documentação oficial do Cypress](https://docs.cypress.io)
+- [README.md](./README.md)
+- [docs/estrategia-de-testes.md](./docs/estrategia-de-testes.md)
+- [docs/padrao-de-nomenclatura.md](./docs/padrao-de-nomenclatura.md)
+- [docs/arquitetura.md](./docs/arquitetura.md)
+
+---
+
+## 14. Próximo passo
+
+1. configure o arquivo `.env`
+2. execute `npm run cypress:open`
+3. selecione o arquivo de login
+4. acompanhe os 5 testes em ação
+
+Pronto para começar! 🚀
 
 - confira o caminho do arquivo
 - verifique a extensão `.cy.js`
