@@ -1,0 +1,25 @@
+{
+  "usuarioValido": {
+    "usuario": "usuario.teste",
+    "senha": "senha_teste",
+    "nome": "Usuário de Teste"
+  },
+  "usuarioInvalido": {
+    "usuario": "usuario.invalido",
+    "senha": "senha_invalida"
+  },
+  "usuarioInexistente": {
+    "usuario": "usuario.naoexiste@example.com",
+    "senha": "qualquersenha123"
+  },
+  "senhaInvalida": {
+    "usuario": "usuario.teste",
+    "senha": "senha_errada"
+  },
+  "mensagensErro": {
+    "usuarioInvalido": "Usuário ou senha inválidos",
+    "usuarioObrigatorio": "Campo usuário é obrigatório",
+    "senhaObrigatoria": "Campo senha é obrigatório",
+    "loginInvalido": "Credenciais inválidas. Tente novamente."
+  }
+}

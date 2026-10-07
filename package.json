@@ -1,0 +1,33 @@
+{
+  "name": "projetocypressteste01",
+  "version": "1.0.0",
+  "description": "Projeto profissional de automação de testes E2E com Cypress",
+  "author": "QA Team",
+  "license": "MIT",
+  "main": "index.js",
+  "keywords": [
+    "cypress",
+    "e2e",
+    "automation",
+    "testing",
+    "javascript"
+  ],
+  "scripts": {
+    "test": "cypress run",
+    "test:headed": "cypress run --headed",
+    "test:chrome": "cypress run --browser chrome",
+    "test:firefox": "cypress run --browser firefox",
+    "test:edge": "cypress run --browser edge",
+    "test:login": "cypress run --spec 'cypress/e2e/login/login.cy.js'",
+    "test:report": "cypress run && npm run mochawesome:report",
+    "cypress:open": "cypress open",
+    "lint": "eslint cypress/**/*.js",
+    "lint:fix": "eslint cypress/**/*.js --fix",
+    "mochawesome:report": "mochawesome-report-generator reports/*.json -o reports -i true"
+  },
+  "devDependencies": {
+    "cypress": "^15.21.1",
+    "eslint": "^10.9.1",
+    "mochawesome": "^8.0.1"
+  }
+}

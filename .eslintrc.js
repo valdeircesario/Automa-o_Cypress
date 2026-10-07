@@ -1,0 +1,40 @@
+module.exports = {
+  env: {
+    browser: true,
+    es2021: true,
+    node: true,
+    "cypress/globals": true,
+  },
+  extends: "eslint:recommended",
+  plugins: ["cypress"],
+  parserOptions: {
+    ecmaVersion: "latest",
+    sourceType: "module",
+  },
+  rules: {
+    "no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+    quotes: ["error", "single", { avoidEscape: true }],
+    semi: ["error", "always"],
+    indent: ["error", 2],
+    "comma-dangle": ["error", "always-multiline"],
+    "no-console": ["warn", { allow: ["warn", "error"] }],
+    eqeqeq: ["error", "always"],
+    curly: ["error", "all"],
+    "brace-style": ["error", "1tbs"],
+    "keyword-spacing": "error",
+    "space-before-function-paren": [
+      "error",
+      {
+        anonymous: "always",
+        named: "never",
+        asyncArrow: "always",
+      },
+    ],
+    "space-infix-ops": "error",
+    "space-before-blocks": "error",
+    "no-multiple-empty-lines": ["error", { max: 2, maxEOF: 0 }],
+    "cypress/no-assigning-return-values": "error",
+    "cypress/no-unnecessary-waiting": "warn",
+    "cypress/assertion-before-screenshot": "warn",
+  },
+};
