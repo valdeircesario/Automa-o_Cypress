@@ -2,874 +2,454 @@
 
 [![Node.js](https://img.shields.io/badge/Node.js-v20.13.1-green)](https://nodejs.org/)
 [![npm](https://img.shields.io/badge/npm-10.5.2-blue)](https://www.npmjs.com/)
-[![Cypress](https://img.shields.io/badge/Cypress-latest-blue)](https://cypress.io/)
+[![Cypress](https://img.shields.io/badge/Cypress-15.21.1-blue)](https://www.cypress.io/)
+[![ESLint](https://img.shields.io/badge/ESLint-v10.9.1-red)](https://eslint.org/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
 
-## 📋 Índice
+## 🎯 Visão Geral
 
-1. [Objetivo](#objetivo)
-2. [Tecnologias](#tecnologias)
-3. [Arquitetura](#arquitetura)
-4. [Estrutura de Diretórios](#estrutura-de-diretórios)
-5. [Instalação](#instalação)
-6. [Configuração](#configuração)
-7. [Execução dos Testes](#execução-dos-testes)
-8. [Padrões e Boas Práticas](#padrões-e-boas-práticas)
-9. [Page Object Model](#page-object-model)
-10. [Fixtures](#fixtures)
-11. [Custom Commands](#custom-commands)
-12. [Relatórios](#relatórios)
-13. [Adicionando Novos Testes](#adicionando-novos-testes)
-14. [Documentação](#documentação)
-15. [Contribuindo](#contribuindo)
+Este projeto foi desenvolvido como uma base de estudo e referência para automação de testes E2E com Cypress e JavaScript. O objetivo principal é praticar boas práticas de qualidade, organização e manutenção em testes automatizados, ao mesmo tempo em que cria uma estrutura profissional e reutilizável para novos projetos.
+
+A estrutura foi pensada para ser clara, escalável e didática, servindo tanto como material de aprendizado quanto como referência para outros projetos de automação.
+
+### Propósito do projeto
+
+- ✅ Aprender Cypress na prática
+- ✅ Estruturar testes com organização e padronização
+- ✅ Aplicar boas práticas de QA e automação
+- ✅ Usar Page Object Model (POM) e arquitetura modular
+- ✅ Criar um projeto fácil de evoluir e reutilizar
+
+### Filosofia da solução
+
+- Simplicidade na estrutura
+- Clareza nos testes
+- Reuso de código e dados
+- Facilidade de manutenção
+- Alto valor como referência acadêmica e profissional
+
+---
+
+## 🧭 Índice
+
+1. [Objetivo](#-objetivo)
+2. [Tecnologias](#-tecnologias)
+3. [Arquitetura do Projeto](#-arquitetura-do-projeto)
+4. [Estrutura de Diretórios](#-estrutura-de-diretórios)
+5. [Casos de Teste Implementados](#-casos-de-teste-implementados)
+6. [Configuração e Instalação](#-configuração-e-instalação)
+7. [Execução dos Testes](#-execução-dos-testes)
+8. [Padrões e Boas Práticas](#-padrões-e-boas-práticas)
+9. [Relatórios](#-relatórios)
+10. [Checklist de Setup](#-checklist-de-setup)
 
 ---
 
 ## 🎯 Objetivo
 
-Este projeto implementa uma estrutura profissional de automação de testes E2E (End-to-End) utilizando **Cypress** e **JavaScript**, seguindo as melhores práticas da indústria.
+O projeto busca demonstrar uma automação de testes E2E com Cypress aplicada em cenários reais de navegação e validação de interface, incluindo autenticação, cadastro e navegação principal de uma aplicação web.
 
-### Princípios
+Além disso, a estrutura foi montada para ser fácil de entender e reaproveitar em outras jornadas de automação. Isso permite que o projeto funcione como uma referência útil para quem está aprendendo a automatizar testes com qualidade e organização.
 
-- ✅ **Escalabilidade**: Estrutura preparada para crescimento
-- ✅ **Manutenibilidade**: Código limpo e bem documentado
-- ✅ **Reutilização**: Componentes reutilizáveis
-- ✅ **Qualidade**: Testes independentes e confiáveis
-- ✅ **Profissionalismo**: Padrão de projeto corporativo
+### Princípios aplicados
+
+- ✅ Escalabilidade: a estrutura permite expandir por módulos
+- ✅ Manutenibilidade: foco em código legível e organizado
+- ✅ Reuso:fixtures, commands e POM reduzem duplicação
+- ✅ Robustez: uso de validações de UI e screenshots em falhas
+- ✅ Didática: organização que favorece aprendizagem e referência
 
 ---
 
 ## 🛠 Tecnologias
 
-| Tecnologia      | Versão    | Propósito                |
-| --------------- | --------- | ------------------------ |
-| **Node.js**     | v20.13.1+ | Runtime JavaScript       |
-| **npm**         | 10.5.2+   | Gerenciador de pacotes   |
-| **Cypress**     | latest    | Framework de testes E2E  |
-| **Mochawesome** | ^8.0.0    | Relatórios HTML          |
-| **ESLint**      | latest    | Linting de código        |
-| **JavaScript**  | ES6+      | Linguagem de programação |
+| Tecnologia  | Versão    | Finalidade                                 |
+| ----------- | --------- | ------------------------------------------ |
+| Node.js     | v20.13.1+ | Runtime da aplicação e execução dos testes |
+| npm         | 10.5.2+   | Gerenciamento de dependências              |
+| Cypress     | 15.21.1   | Framework de automação E2E                 |
+| JavaScript  | ES6+      | Linguagem principal                        |
+| ESLint      | v10.9.1   | Padronização e qualidade de código         |
+| Mochawesome | ^8.0.1    | Geração de relatórios HTML e JSON          |
 
 ---
 
-## 🏗 Arquitetura
+## 🏗 Arquitetura do Projeto
 
-```
+A arquitetura do projeto foi organizada em camadas para manter os testes legíveis, reutilizáveis e fáceis de evoluir.
+
+```text
 ┌─────────────────────────────────────────────────────────────┐
-│                    CAMADA DE TESTES                         │
-│  cypress/e2e/login/loginUser.cy.js (Testes Automatizados)  │
+│                     CAMADA DE TESTES                        │
+│  cypress/e2e/login/loginUser.cy.js                       │
+│  cypress/e2e/cadastro/cadastro.cy.js                     │
+│  cypress/e2e/home/home.cy.js                              │
 └──────────────────────┬──────────────────────────────────────┘
                        │
 ┌──────────────────────▼──────────────────────────────────────┐
-│               CAMADA DE PAGE OBJECTS                        │
-│    cypress/pages/LoginPage.js  (Encapsulamento de UI)      │
+│                  PAGE OBJECT MODEL                         │
+│  cypress/pages/LoginPage.js                               │
+│  Encapsula elementos e ações da interface                  │
 └──────────────────────┬──────────────────────────────────────┘
                        │
 ┌──────────────────────▼──────────────────────────────────────┐
-│           CAMADA DE SUPORTE E UTILITÁRIOS                   │
-│  Custom Commands | Env local | Fixtures | Helpers         │
+│                SUPORTE E UTILITÁRIOS                      │
+│  commands.js | e2e.js | helpers.js | fixtures             │
+│  Reaproveitamento, configuração e dados de teste          │
 └──────────────────────┬──────────────────────────────────────┘
                        │
 ┌──────────────────────▼──────────────────────────────────────┐
-│                 CYPRESS API                                 │
-│   Interação com a Aplicação Web e Browser                  │
+│                        CYPRESS API                         │
+│  Interação com elementos, navegação, assertions e captura │
+│  de evidências (screenshots e relatórios)                 │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+### Camadas principais
+
+- Testes: organização por funcionalidade e módulo
+- Page Objects: encapsulam elementos e fluxos da interface
+- Fixtures: dados reutilizáveis para cenários
+- Custom Commands: ações repetidas e padrões compartilhados
+- Utilitários: funções auxiliares para geração e suporte
+- Relatórios: evidências de execução e análise de falhas
 
 ---
 
 ## 📁 Estrutura de Diretórios
 
-```
-projeto-automacao-cypress/
-│
+```text
+projetocypressteste01/
 ├── cypress/
-│   ├── e2e/                          # Testes automatizados
+│   ├── e2e/
 │   │   ├── login/
-│   │   │   └── loginUser.cy.js       # Testes do módulo Login
+│   │   │   └── loginUser.cy.js
 │   │   ├── cadastro/
-│   │   │   └── cadastro.cy.js        # Testes do cadastro
+│   │   │   └── cadastro.cy.js
 │   │   └── home/
-│   │       └── home.cy.js            # Testes da home
+│   │       └── home.cy.js
 │   │
-│   ├── fixtures/                     # Massa de dados estática
-│   │   └── login.json                # Dados de teste para login
+│   ├── fixtures/
+│   │   └── login.json
 │   │
-│   ├── pages/                        # Page Objects (POM)
-│   │   └── LoginPage.js              # Objeto para página de login
+│   ├── pages/
+│   │   └── LoginPage.js
 │   │
-│   ├── support/                      # Arquivos de suporte
-│   │   ├── commands.js               # Comandos customizados
-│   │   └── e2e.js                    # Configuração global
+│   ├── support/
+│   │   ├── commands.js
+│   │   └── e2e.js
 │   │
-│   ├── utils/                        # Utilitários
-│   │   └── helpers.js                # Funções auxiliares
+│   ├── utils/
+│   │   └── helpers.js
 │   │
-│   └── schemas/                      # Schemas de validação (futuro)
+│   └── schemas/
 │
-├── docs/                             # Documentação
-│   ├── casos-de-teste/               # Especificação de casos
-│   │   └── CT-001-login.md
-│   │
-│   └── cenarios-de-teste/            # Especificação de cenários
-│       ├── login/
-│       │   ├── CTN-001-login-valido.md
-│       │   └── CTN-006-login-valido.md
-│       ├── cadastro/
-│       └── home/
+├── docs/
+│   ├── casos-de-teste/
+│   └── cenarios-de-teste/
 │
-├── reports/                          # Relatórios gerados
-├── screenshots/                      # Screenshots de falhas
-├── videos/                           # Vídeos de execução
-│
-├── cypress.env.example.json           # Modelo de perfis sem segredos
-├── .eslintrc.js                      # Configuração do ESLint
-├── .gitignore                        # Arquivos ignorados pelo Git
-├── cypress.config.js                 # Configuração do Cypress
-├── package.json                      # Dependências e scripts
-└── README.md                         # Este arquivo
+├── reports/
+├── screenshots/
+├── videos/
+├── .gitignore
+├── .eslintrc.js
+├── cypress.config.js
+├── cypress.env.example.json
+├── cypress.env.json
+├── eslint.config.js
+├── package.json
+├── package-lock.json
+├── PROJECT_SUMMARY.md
+├── QUICK_START.md
+├── README.md
+└── LICENSE
 ```
 
-### Justificativa da Estrutura
+### Justificativa da estrutura
 
-| Diretório                             | Propósito                                         |
-| ------------------------------------- | ------------------------------------------------- |
-| `cypress/e2e/`                        | Organiza testes por módulo/funcionalidade         |
-| `cypress/pages/`                      | Encapsula elementos e ações de cada página (POM)  |
-| `cypress/fixtures/`                   | Dados reutilizáveis não versionados como fixtures |
-| `cypress/support/`                    | Código compartilhado entre todos os testes        |
-| `cypress/utils/`                      | Funções auxiliares genéricas                      |
-| `docs/`                               | Documentação de casos e cenários                  |
-| `reports/`, `screenshots/`, `videos/` | Artefatos gerados                                 |
+| Diretório           | Finalidade                                      |
+| ------------------- | ----------------------------------------------- |
+| `cypress/e2e/`      | Armazena os testes automatizados por módulo     |
+| `cypress/pages/`    | Encapsula elementos e ações das páginas (POM)   |
+| `cypress/fixtures/` | Dados estáticos e reutilizáveis                 |
+| `cypress/support/`  | Comandos personalizados e configurações globais |
+| `cypress/utils/`    | Funções auxiliares e geração de dados           |
+| `docs/`             | Documentação de casos, cenários e estratégias   |
+| `reports/`          | Relatórios gerados pela execução                |
+| `screenshots/`      | Evidências visuais de falhas                    |
+| `videos/`           | Gravações de execução                           |
 
 ---
 
-## 🚀 Instalação
+## 🧪 Casos de Teste Implementados
+
+Este projeto já contém testes prontos para os principais fluxos da aplicação, com foco em estudo e validação prática do comportamento da interface.
+
+### 1) Módulo Login
+
+| ID      | Cenário                                     | Status |
+| ------- | ------------------------------------------- | ------ |
+| CTN-001 | Validar página de login e elementos da tela | ✅     |
+| CTN-002 | Login sem preencher email e senha           | ✅     |
+| CTN-003 | Login com email e/ou senha inválidos        | ✅     |
+| CTN-004 | Login válido                                | ✅     |
+
+Cobertura:
+
+- Validação visual da tela de login
+- Verificação de campos obrigatórios
+- Mensagens de erro
+- Fluxo de autenticação bem-sucedida
+- Redirecionamento para a área do paciente
+
+### 2) Módulo Cadastro
+
+| ID      | Cenário                              | Status |
+| ------- | ------------------------------------ | ------ |
+| CTN-001 | Exibir campos e seções do formulário | ✅     |
+| CTN-002 | Cadastrar usuário válido             | ✅     |
+| CTN-003 | CPF já cadastrado                    | ✅     |
+| CTN-004 | Cadastro sem nome                    | ✅     |
+| CTN-005 | Cadastro sem nome e CPF              | ✅     |
+| CTN-006 | CPF inválido                         | ✅     |
+| CTN-007 | Email já cadastrado                  | ✅     |
+| CTN-008 | Endereço obrigatório                 | ✅     |
+| CTN-009 | CEP obrigatório                      | ✅     |
+| CTN-010 | Email obrigatório                    | ✅     |
+| CTN-011 | Validar mensagem de CPF inválido     | ✅     |
+
+Cobertura:
+
+- Validação de campos obrigatórios
+- Regras de negócio de cadastro
+- Mensagens de feedback para o usuário
+- Cadastro com sucesso
+- Prevenção de duplicidade
+
+### 3) Módulo Home
+
+| ID      | Cenário                          | Status |
+| ------- | -------------------------------- | ------ |
+| CTN-001 | Validar cabeçalho e navegação    | ✅     |
+| CTN-002 | Validar corpo da página inicial  | ✅     |
+| CTN-003 | Validar campanhas e notícias     | ✅     |
+| CTN-004 | Validar consulta de medicamentos | ✅     |
+| CTN-005 | Validar seção de funcionalidades | ✅     |
+| CTN-006 | Validar card de criação de conta | ✅     |
+
+Cobertura:
+
+- Header e navegação principal
+- Seções informativas da home
+- Carrossel/landing de campanhas
+- Consulta de medicamentos
+- Funcionalidades principais da plataforma
+- CTA para cadastro
+
+---
+
+## ⚙️ Configuração e Instalação
 
 ### Pré-requisitos
 
-- **Node.js** v20.13.1 ou superior
-- **npm** 10.5.2 ou superior
-- **Git** (recomendado)
+- Node.js v20.13.1+
+- npm 10.5.2+
+- Git (opcional, mas recomendado)
 
-### Passos
+### Passo a passo
 
-1. **Clone o repositório** (ou abra o projeto):
+1. Clone ou abra o projeto localmente:
 
 ```bash
 cd projetocypressteste01
 ```
 
-2. **Instale as dependências**:
+2. Instale as dependências:
 
 ```bash
 npm install
 ```
 
-3. **Verifique a instalação**:
+3. Verifique se o ambiente está funcionando:
 
 ```bash
 npx cypress --version
 npm run lint --help
 ```
 
----
-
-## ⚙️ Configuração
-
-### Variáveis de Ambiente
-
-1. **Use o modelo local de credenciais**:
+4. Configure o arquivo de ambiente local, se necessário:
 
 ```bash
 copy cypress.env.example.json cypress.env.json
 ```
 
-2. **Configure os perfis em `cypress.env.json`**:
+> Importante: o arquivo `cypress.env.json` não deve ser versionado com credenciais reais.
 
-```env
-{
-  "usuarios": {
-    "user": {
-      "email": "usuario@example.com",
-      "senha": "senha-local"
-    },
-    "loginInvalido": {
-      "email": "inexistente@example.com",
-      "senha": "senha-invalida"
-    }
-  }
-}
-```
+### Arquivo de configuração principal
 
-> ⚠️ **IMPORTANTE**: Nunca versione `cypress.env.json` com credenciais reais. O arquivo já está no `.gitignore`.
+O projeto utiliza `cypress.config.js` para definir:
 
-A URL padrão fica em `cypress.config.js` e pode ser substituída por `CYPRESS_BASE_URL`.
+- URL base da aplicação
+- resolução da viewport
+- timeout padrão
+- relatório Mochawesome
+- screenshot em falhas
+- gravação de vídeos
 
-### Arquivo `cypress.config.js`
-
-Configurações principais:
+Exemplo de configuração:
 
 ```javascript
-baseUrl; // URL base da aplicação
-viewportWidth / Height; // Resolução de tela
-defaultCommandTimeout; // Timeout padrão
-reporter; // Formato de relatório
-reporterOptions; // Configurações do Mochawesome
-video; // Gravação de vídeos
-screenshotOnRunFailure; // Screenshots em falhas
+module.exports = defineConfig({
+  e2e: {
+    baseUrl: process.env.CYPRESS_BASE_URL || "http://localhost:5173",
+    viewportWidth: 1280,
+    viewportHeight: 720,
+    defaultCommandTimeout: 10000,
+    reporter: "mochawesome",
+    screenshotOnRunFailure: true,
+  },
+});
 ```
-
-### Arquivo `.eslintrc.js`
-
-Regras de lint para código JavaScript/Cypress:
-
-- Aspas simples obrigatórias
-- Ponto e vírgula obrigatório
-- Sem variáveis não utilizadas
-- Indentação de 2 espaços
-- Assertions antes de screenshots (Cypress)
 
 ---
 
 ## ▶️ Execução dos Testes
 
-### Scripts npm
+### Scripts disponíveis
 
 ```bash
-# Executar todos os testes em modo headless (CLI)
+# Executa todos os testes em modo headless
 npm test
 
-# Executar em modo interactive (Cypress GUI)
+# Abre a interface gráfica do Cypress
 npm run cypress:open
 
-# Executar o spec de login atual
-npx cypress run --spec "cypress/e2e/login/loginUser.cy.js"
-
-# Executar com navegador específico
-npm run test:chrome
-npm run test:firefox
-npm run test:edge
-
-# Executar com visualização do navegador aberto (headed)
+# Executa no navegador em modo headed
 npm run test:headed
 
-# Executar e gerar relatório
+# Executa em Chrome
+npm run test:chrome
+
+# Executa em Firefox
+npm run test:firefox
+
+# Executa em Edge
+npm run test:edge
+
+# Executa apenas testes de login
+npm run test:login
+
+# Gera relatório após execução
 npm run test:report
 
-# Validar código com ESLint
+# Verifica lint do projeto
 npm run lint
 
-# Corrigir problemas detectáveis automaticamente
+# Corrige problemas detectados automaticamente
 npm run lint:fix
 ```
 
-### Exemplos de Uso
-
-**Executar testes do módulo login:**
+### Exemplos de uso
 
 ```bash
 npx cypress run --spec "cypress/e2e/login/loginUser.cy.js"
 ```
 
-**Executar um teste específico:**
-
 ```bash
-npx cypress run --spec "cypress/e2e/login/loginUser.cy.js"
+npx cypress run --spec "cypress/e2e/cadastro/cadastro.cy.js"
 ```
 
-**Executar em modo watch (para desenvolvimento):**
-
 ```bash
-npx cypress open
+npx cypress run --spec "cypress/e2e/home/home.cy.js"
 ```
 
-**Executar em modo headless com relatório:**
+### Observações
 
-```bash
-npm run test:report
-```
+- A execução pode ser feita em modo headless para CI/CD ou em modo interativo para desenvolvimento.
+- Screenshots são capturados em falhas para facilitar diagnóstico.
+- O projeto já está preparado para geração de relatórios em HTML.
 
 ---
 
-## 📝 Padrões e Boas Práticas
+## 🧩 Padrões e Boas Práticas
 
-### Nomenclatura
+### Page Object Model (POM)
 
-#### Arquivos de Teste
+O projeto utiliza POM para separar a lógica de teste da lógica de interface, deixando os testes mais legíveis e fáceis de manter.
 
-```
-[modulo].cy.js
-Exemplo: loginUser.cy.js, usuarios.cy.js
-```
-
-#### Variáveis
-
-```javascript
-// Use camelCase
-const usuarioValido = "user@example.com";
-const senhaCorreta = "abc123456";
-
-// Constantes em SCREAMING_SNAKE_CASE
-const TIMEOUT_PADRAO = 5000;
-const URL_INICIAL = "/";
-```
-
-#### Funções
-
-```javascript
-// Use verbos descritivos
-function preencherEmail(email) {}
-function validarMensagemErro(mensagem) {}
-function clicarBotaoEntrar() {}
-```
-
-### Padrão AAA (Arrange-Act-Assert)
-
-Todos os testes devem seguir este padrão:
-
-```javascript
-it("CTN-001 — Login válido", () => {
-  // Arrange - Preparar dados e cenário
-  const email = "user@example.com";
-  const senha = "senha123";
-
-  // Act - Executar a ação
-  loginPage.acessarPagina();
-  loginPage.preencherEmail(email);
-  loginPage.preencherSenha(senha);
-  loginPage.clicarEntrar();
-
-  // Assert - Validar resultado
-  loginPage.validarLoginRealizado();
-});
-```
-
-### Seletores Recomendados
-
-**Prioridade de uso:**
-
-1. **data-testid** (RECOMENDADO) - Estável e seguro
-
-```html
-<input data-testid="input-email" />
-```
-
-```javascript
-cy.get('[data-testid="input-email"]');
-```
-
-2. **data-cy** - Alternativa também aceitável
-
-```html
-<button data-cy="btn-login" />
-```
-
-3. **Classes CSS estáveis** - Se forem específicas
-
-```html
-<form class="login-form" />
-```
-
-```javascript
-cy.get("form.login-form");
-```
-
-**Evite:**
-
-- ❌ nth-child, nth-of-type
-- ❌ Classes geradas dinamicamente
-- ❌ IDs dinâmicos
-- ❌ XPath completo
-
-### Independência de Testes
-
-```javascript
-// ✅ BOM: Cada teste é independente
-it("CTN-001 — Login válido", () => {
-  loginPage.acessarPagina();
-  // ... teste completo
-});
-
-it("CTN-002 — Senha inválida", () => {
-  loginPage.acessarPagina();
-  // ... teste diferente
-});
-
-// ❌ RUIM: Testes dependentes
-it("Login", () => {
-  /* testa login */
-});
-it("Dashboard", () => {
-  // Depende do teste anterior passar
-  cy.get(".dashboard");
-});
-```
-
-### Evite Sleeps
-
-```javascript
-// ❌ RUIM
-cy.wait(3000);
-cy.get('[data-testid="elemento"]').click();
-
-// ✅ BOM
-cy.get('[data-testid="elemento"]', { timeout: 10000 }).click();
-
-// ✅ BOM - Com comando customizado
-cy.waitForElement('[data-testid="elemento"]');
-```
-
----
-
-## 🎭 Page Object Model
-
-### O que é Page Object Model (POM)?
-
-POM é um padrão de design que encapsula elementos e ações de uma página em uma classe, mantendo os testes limpos e legíveis.
-
-### Exemplo: LoginPage.js
+Exemplo:
 
 ```javascript
 class LoginPage {
-  // Elementos (getters)
   get emailInput() {
     return cy.get('[name="email"]');
   }
 
   get senhaInput() {
-    return cy.get('[data-testid="input-senha"]');
+    return cy.get('[name="senha"]');
   }
 
-  get btnEntrar() {
-    return cy.get('[data-testid="btn-entrar"]');
+  visitarLogin() {
+    cy.visit("/");
   }
 
-  // Ações
-  acessarPagina(url = "/") {
-    cy.visit(url);
-  }
-
-  preencherEmail(email) {
+  fazerLogin(email, senha) {
     this.emailInput.clear().type(email);
-  }
-
-  preencherSenha(senha) {
     this.senhaInput.clear().type(senha);
-  }
-
-  clicarEntrar() {
-    this.btnEntrar.click();
-  }
-
-  // Assertions
-  validarLoginRealizado() {
-    cy.contains("Portal do Paciente").should("be.visible");
+    cy.contains("Entrar").click();
   }
 }
 
 export default new LoginPage();
 ```
 
-### Usando no Teste
+### Fixtures
 
-```javascript
-import loginPage from "../../pages/LoginPage";
+Os dados de teste são armazenados em fixtures para facilitar reutilização e organização.
 
-describe("CT-001 — Login", () => {
-  it("CTN-001 — Login válido", () => {
-    loginPage.acessarPagina();
-    loginPage.preencherEmail("user@example.com");
-    loginPage.preencherSenha("senha123");
-    loginPage.clicarEntrar();
-    loginPage.validarLoginRealizado();
-  });
-});
-```
+### Custom Commands
 
-### Benefícios
+Comandos reutilizáveis são criados em `cypress/support/commands.js` para reduzir repetição entre testes.
 
-✅ Testes limpos e legíveis
-✅ Fácil manutenção
-✅ Reutilização de código
-✅ Isolamento de mudanças UI
+### Padrão AAA
 
-### Criando um Novo Page Object
+Os testes seguem o padrão Arrange, Act, Assert, deixando a leitura clara e o raciocínio do cenário explícito.
 
-1. Crie arquivo em `cypress/pages/NovaPagina.js`
-2. Identifique os elementos principais
-3. Crie getters para cada elemento
-4. Implemente métodos de ação
-5. Implemente métodos de validação
-6. Exporte uma instância única (singleton)
+### Boas práticas adotadas
 
----
-
-## 📦 Fixtures
-
-Fixtures são dados estáticos reutilizáveis em testes.
-
-### Localização
-
-`cypress/fixtures/login.json`
-
-### Exemplo
-
-```json
-{
-  "usuarioValido": {
-    "email": "usuario@example.com",
-    "senha": "senha-local"
-  },
-  "usuarioInvalido": {
-    "email": "inexistente@example.com",
-    "senha": "senha-invalida"
-  }
-}
-```
-
-### Uso no Teste
-
-```javascript
-it("CTN-001 — Login válido", () => {
-  cy.fixture("login.json").then((dados) => {
-    const email = dados.usuarioValido.email;
-    const senha = dados.usuarioValido.senha;
-
-    loginPage.realizarLogin(email, senha);
-  });
-});
-```
-
-### Quando Usar
-
-✅ Dados estáticos e reutilizáveis
-✅ Massa de dados de teste
-✅ Configurações específicas
-✅ Respostas de API mockadas
-
-### Quando NÃO Usar
-
-❌ Dados sensíveis (use `cypress.env.json`)
-❌ Dados dinâmicos (gere no teste)
-❌ Dados muito grandes (pode desacelerar testes)
-
----
-
-## 🎮 Custom Commands
-
-Custom commands reutilizam ações comuns nos testes.
-
-### Localização
-
-`cypress/support/commands.js`
-
-### Exemplo
-
-```javascript
-Cypress.Commands.add("loginComPerfil", (perfil) => {
-  const usuario = Cypress.env("usuarios")[perfil];
-  cy.get('[name="email"]').clear().type(usuario.email);
-  cy.get('[name="senha"]').clear().type(usuario.senha);
-});
-```
-
-### Uso
-
-```javascript
-cy.loginComPerfil("user");
-```
-
-### Quando Usar
-
-✅ Ação complexa reutilizada em múltiplos testes
-✅ Fluxo comum (login, logout, etc)
-✅ Setup/teardown repetitivo
-
-### Quando NÃO Usar
-
-❌ Ações simples (use Page Object direto)
-❌ Lógica específica de um teste
-❌ Assertions (mantenha no teste)
+- ✅ Nomeação clara para testes e funções
+- ✅ Validações explícitas de UI
+- ✅ Reuso de dados e ações
+- ✅ Evitação de sleeps desnecessários
+- ✅ uso de seletores estáveis e legíveis
+- ✅ screenshots em cenários de falha
+- ✅ ESLint para manter a qualidade do código
 
 ---
 
 ## 📊 Relatórios
 
-### Mochawesome
+O projeto já está configurado para gerar relatórios com Mochawesome.
 
-Gera relatórios HTML profissionais.
-
-### Geração
+### Comando para geração
 
 ```bash
 npm run test:report
 ```
 
-### Localização
+### Saída
 
-`reports/` - Arquivos de relatório gerados
+Os relatórios são gerados em `reports/` em formato HTML e JSON, permitindo:
 
-### Visualização
-
-1. Abra `reports/mochawesome.html` no navegador
-2. Visualize resultados em tempo real
-3. Acesse screenshots em caso de falhas
-4. Analise duração de cada teste
-
-### Configuração
-
-Em `cypress.config.js`:
-
-```javascript
-reporter: 'mochawesome',
-reporterOptions: {
-  reportDir: 'reports',
-  reportFilename: '[status]_[datetime]-report',
-  html: true,
-  json: true,
-  overwrite: false,
-  timestamp: 'mm/dd/yyyy_HH:MM:ss',
-}
-```
+- análise visual dos resultados;
+- identificação de falhas e tempo de execução;
+- documentação das evidências de testes.
 
 ---
 
-## ➕ Adicionando Novos Testes
-
-### Passo 1: Criar Documentação
-
-**Arquivo:** `docs/casos-de-teste/CT-XXX-nome.md`
-
-```markdown
-# CT-XXX — Descrição do Caso
-
-## Objetivo
-
-Descrever o objetivo...
-
-## Cenários
-
-- CTN-XXX-01 — Primeiro cenário
-- CTN-XXX-02 — Segundo cenário
-```
-
-**Arquivo:** `docs/cenarios-de-teste/nome/CTN-XXX-01.md`
-
-```markdown
-# CTN-XXX-01 — Descrição do Cenário
-
-**Caso de Teste:** CT-XXX
-
-**Objetivo:** Descrever...
-
-**Passos:**
-
-1. Passo 1
-2. Passo 2
-
-**Resultado Esperado:**
-Esperado...
-```
-
-### Passo 2: Criar Page Object (se necessário)
-
-**Arquivo:** `cypress/pages/NovaPagina.js`
-
-```javascript
-class NovaPagina {
-  get elemento() {
-    return cy.get('[data-testid="elemento"]');
-  }
-
-  acessarPagina(url = "/nova-pagina") {
-    cy.visit(url);
-  }
-
-  realizarAcao() {
-    this.elemento.click();
-  }
-
-  validarResultado() {
-    cy.url().should("include", "/resultado");
-  }
-}
-
-export default new NovaPagina();
-```
-
-### Passo 3: Criar Fixtures (se necessário)
-
-**Arquivo:** `cypress/fixtures/novo-modulo.json`
-
-```json
-{
-  "dados": {
-    "campo1": "valor1",
-    "campo2": "valor2"
-  }
-}
-```
-
-### Passo 4: Criar Arquivo de Teste
-
-**Arquivo:** `cypress/e2e/novo-modulo/novo-modulo.cy.js`
-
-```javascript
-import novaPagina from "../../pages/NovaPagina";
-import { helpers } from "../../utils/helpers";
-
-describe("CT-XXX — Novo Módulo", () => {
-  beforeEach(() => {
-    helpers.log("Iniciando teste");
-    novaPagina.acessarPagina();
-  });
-
-  it("CTN-XXX-01 — Primeiro cenário", () => {
-    // Arrange
-    cy.fixture("novo-modulo.json").then((dados) => {
-      // Act
-      novaPagina.realizarAcao();
-
-      // Assert
-      novaPagina.validarResultado();
-    });
-  });
-});
-```
-
-### Passo 5: Executar Testes
-
-```bash
-npm run test
-```
-
----
-
-## 📚 Documentação
-
-### Estrutura de Documentação
-
-```
-docs/
-├── casos-de-teste/          # Especificação de casos
-│   ├── CT-001-login.md
-│   ├── CT-002-usuarios.md
-│   └── ...
-│
-└── cenarios-de-teste/       # Especificação detalhada de cada cenário
-    ├── login/
-    │   ├── CTN-001-login-valido.md
-    │   ├── CTN-002-login-senha-invalida.md
-    │   └── ...
-    │
-    └── usuarios/
-        ├── CTN-XXX-criar-usuario.md
-        └── ...
-```
-
-### Template de Caso de Teste (CT)
-
-```markdown
-# CT-XXX — Descrição
-
-## Objetivo
-
-Descrever objetivo...
-
-## Cenários
-
-- CTN-XXX-01 — Cenário 1
-- CTN-XXX-02 — Cenário 2
-
-## Resultado Esperado
-
-Descrever...
-
-## Dependências
-
-- Item 1
-- Item 2
-
-## Prioridade
-
-Alta/Média/Baixa
-```
-
-### Template de Cenário (CTN)
-
-```markdown
-# CTN-XXX-01 — Descrição
-
-**Caso de Teste:** CT-XXX
-
-**Objetivo:** Descrever...
-
-**Prioridade:** Alta
-
-**Tipo:** E2E
-
-**Automatizado:** Sim
-
-## Dados de Teste
-
-| Campo  | Valor  |
-| ------ | ------ |
-| campo1 | valor1 |
-
-## Passos
-
-1. Passo 1
-2. Passo 2
-
-## Resultado Esperado
-
-- Resultado 1
-- Resultado 2
-
-## Critérios de Aceitação
-
-- ✅ Critério 1
-- ✅ Critério 2
-```
-
----
-
-## 🤝 Contribuindo
-
-### Padrão de Commits
-
-```
-feat: adiciona novo módulo de testes
-fix: corrige seletor inválido
-docs: atualiza documentação
-refactor: melhora estrutura de POM
-style: ajusta formatação
-test: adiciona novo cenário
-```
-
-### Code Review Checklist
-
-- [ ] Testes independentes?
-- [ ] Page Object utilizado?
-- [ ] Seletores estáveis?
-- [ ] Sem hardcoding de dados?
-- [ ] Sem sleeps desnecessários?
-- [ ] ESLint passando?
-- [ ] Documentação atualizada?
-- [ ] Nomes descritivos?
-
-### Dúvidas?
-
-- Consulte a documentação de casos em `docs/`
-- Verifique exemplos em `cypress/e2e/`
-- Revise o Page Object em `cypress/pages/`
-
----
-
-## 📋 Checklist de Setup
+## ✅ Checklist de Setup
 
 - [x] Estrutura de diretórios criada
 - [x] npm configurado
@@ -884,22 +464,18 @@ test: adiciona novo cenário
 
 ---
 
-## 📄 Licença
+## 📌 Observação Final
 
-MIT - Sinta-se livre para usar, modificar e distribuir.
+Este projeto representa uma base sólida de estudo e referência para automação de testes com Cypress. Ele foi estruturado com foco em aprendizagem, organização e bons padrões de qualidade, e pode servir como modelo para projetos maiores e mais complexos no futuro.
 
----
-
-## 📞 Suporte
-
-Para dúvidas ou sugestões:
-
-1. Verifique a documentação em `docs/`
-2. Consulte exemplos em `cypress/e2e/`
-3. Revise os Page Objects em `cypress/pages/`
+A intenção é que, além de demonstrar conhecimento técnico, ele também funcione como um material profissional e bem organizado para quem deseja aprender, evoluir e reutilizar boas práticas em automação de testes.
 
 ---
 
-**Criado com ❤️ para QA Profissionais**
+## 📝 Licença
 
-_Última atualização: 29/08/2026_
+MIT - Sinta-se livre para usar, modificar e distribuir este projeto.
+
+---
+
+**Projeto criado para estudo, aprendizado e referência em automação de testes com Cypress.**
