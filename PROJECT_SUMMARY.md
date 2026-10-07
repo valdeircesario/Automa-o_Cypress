@@ -1,143 +1,195 @@
-# 📦 ESTRUTURA COMPLETA DO PROJETO CYPRESS
+# 📦 Cypress Automation Lab
 
+> Projeto de estudo e referência em automação de testes com Cypress, organizado com boas práticas de manutenção, documentação e escalabilidade.
+
+## 🌟 Visão geral
+
+Este repositório foi estruturado para servir como base sólida para aprendizagem e desenvolvimento de automação E2E com Cypress, seguindo padrões profissionais como POM, fixtures, custom commands, organização por módulos e documentação técnica.
+
+Ele foi pensado para ser:
+
+- um laboratório de estudo
+- uma referência para outras pessoas
+- uma base reutilizável para projetos maiores
+- um projeto organizado e legível para manutenção futura
+
+---
+
+## 🧱 Estrutura do projeto
+
+```text
 projetocypressteste01/
 ├── 📂 cypress/
-│ ├── 📂 e2e/
-│ │ └── 📂 login/
-│ │ └── login.cy.js (5 test cases implementados)
-│ ├── 📂 pages/
-│ │ └── LoginPage.js (Page Object Model)
-│ ├── 📂 fixtures/
-│ │ └── login.json (Test data)
-│ ├── 📂 support/
-│ │ ├── commands.js (Custom commands)
-│ │ └── e2e.js (Global configuration)
-│ └── 📂 utils/
-│ └── helpers.js (Utility functions)
+│   ├── 📂 e2e/
+│   │   └── 📂 login/
+│   │       └── login.cy.js                 # 5 casos de teste implementados
+│   ├── 📂 pages/
+│   │   └── LoginPage.js                   # Page Object Model
+│   ├── 📂 fixtures/
+│   │   └── login.json                     # Dados de teste
+│   ├── 📂 support/
+│   │   ├── commands.js                    # Comandos customizados
+│   │   └── e2e.js                         # Configuração global
+│   └── 📂 utils/
+│       └── helpers.js                     # Funções auxiliares
 │
 ├── 📂 docs/
-│ ├── arquitetura.md (Architecture documentation)
-│ ├── casos-de-teste/
-│ │ └── CT-001-login.md (Test cases specification)
-│ ├── cenarios-de-teste/
-│ │ └── login/
-│ │ ├── CTN-001-005.md (5 test scenarios)
-│ │ ├── CTN-002-005.md
-│ │ ├── CTN-003-005.md
-│ │ ├── CTN-004-005.md
-│ │ └── CTN-005-005.md
-│ ├── estrategia-de-testes.md (Test strategy)
-│ └── padrao-de-nomenclatura.md (Naming conventions)
+│   ├── arquitetura.md                     # Documentação da arquitetura
+│   ├── casos-de-teste/
+│   │   └── CT-001-login.md               # Especificação dos casos
+│   ├── cenarios-de-teste/
+│   │   └── login/
+│   │       ├── CTN-001-005.md             # Cenário 1
+│   │       ├── CTN-002-005.md             # Cenário 2
+│   │       ├── CTN-003-005.md             # Cenário 3
+│   │       ├── CTN-004-005.md             # Cenário 4
+│   │       └── CTN-005-005.md             # Cenário 5
+│   ├── estrategia-de-testes.md            # Estratégia de testes
+│   └── padrao-de-nomenclatura.md          # Convenções de nomenclatura
 │
-├── 📂 node_modules/ (Dependencies - 258 packages)
-│ └── [npm dependencies]
+├── 📂 node_modules/                       # Dependências instaladas
 │
-├── 📄 cypress.config.js (Cypress configuration)
-├── 📄 eslint.config.js (ESLint v10+ configuration)
-├── 📄 package.json (Project metadata & scripts)
-├── 📄 package-lock.json (Dependency lock file)
-├── 📄 .env.example (Environment variables template)
-├── 📄 .gitignore (Git exclusion rules)
-├── 📄 README.md (Complete documentation)
-└── 📄 PROJECT_SUMMARY.md (This file)
+├── 📄 cypress.config.js                   # Configuração do Cypress
+├── 📄 eslint.config.js                   # Configuração do ESLint
+├── 📄 package.json                       # Metadados e scripts do projeto
+├── 📄 package-lock.json                  # Lock file das dependências
+├── 📄 .env.example                      # Exemplo de variáveis de ambiente
+├── 📄 .gitignore                        # Arquivos ignorados pelo Git
+├── 📄 README.md                         # Documentação principal
+├── 📄 PROJECT_SUMMARY.md                # Resumo do projeto
+└── 📄 LICENSE                           # Licença do projeto
+```
 
-# 📊 ESTATÍSTICAS DO PROJETO
+---
 
-✅ Total de arquivos criados: 20+
-✅ Total de diretórios: 11
-✅ Pacotes npm instalados: 258
-✅ Vulnerabilidades: 0
-✅ ESLint errors: 0 (passou validação)
-✅ Test cases implementados: 5
-✅ Padrões implementados: POM, AAA, Fixtures, Custom Commands
+## 📊 Estatísticas do projeto
 
-# 🧪 TEST CASES IMPLEMENTADOS
+| Item                         | Valor                               |
+| ---------------------------- | ----------------------------------- |
+| Arquivos criados             | 20+                                 |
+| Diretórios                   | 11                                  |
+| Pacotes npm instalados       | 258                                 |
+| Vulnerabilidades             | 0                                   |
+| Erros de ESLint              | 0                                   |
+| Casos de teste implementados | 5                                   |
+| Padrões adotados             | POM, AAA, Fixtures, Custom Commands |
 
-✓ CTN-001: Login com credenciais válidas
-✓ CTN-002: Login com senha inválida
-✓ CTN-003: Login com usuário inexistente
-✓ CTN-004: Login sem preencher usuário
-✓ CTN-005: Login sem preencher senha
+---
 
-# 🛠️ TECNOLOGIAS UTILIZADAS
+## 🧪 Casos de teste implementados
 
-- Cypress v15.21.1 (E2E Testing Framework)
-- Node.js v20.13.1 (Runtime)
-- npm v10.5.2 (Package Manager)
-- ESLint v10.9.1 (Code Quality)
-- Mochawesome v8.0.1 (Test Reporter)
+- CTN-001: Login com credenciais válidas
+- CTN-002: Login com senha inválida
+- CTN-003: Login com usuário inexistente
+- CTN-004: Login sem preencher usuário
+- CTN-005: Login sem preencher senha
 
-# 📋 NPM SCRIPTS DISPONÍVEIS
+---
 
-npm test - Executar todos os testes (headless)
-npm run cypress:open - Abrir Cypress UI
-npm run test:headed - Executar testes com navegador
-npm run test:chrome - Executar testes apenas em Chrome
-npm run test:firefox - Executar testes apenas em Firefox
-npm run test:edge - Executar testes apenas em Edge
-npm run test:login - Executar apenas testes de Login
-npm run lint - Validar código com ESLint
-npm run lint:fix - Corrigir erros ESLint automaticamente
+## 🛠️ Stack tecnológica
 
-# ✨ RECURSOS PRINCIPAIS
+- Cypress v15.21.1 — framework de automação E2E
+- Node.js v20.13.1 — runtime da aplicação
+- npm v10.5.2 — gerenciador de pacotes
+- ESLint v10.9.1 — qualidade e padronização do código
+- Mochawesome v8.0.1 — geração de relatórios de execução
 
-✅ Page Object Model (POM) - Encapsulation de UI
-✅ Fixtures - Test data centralized
-✅ Custom Commands - Reusable actions (login, logout, waitForElement)
-✅ AAA Pattern - Arrange, Act, Assert structure
-✅ Data Generators - Dynamic test data creation
-✅ Error Handling - Global exception handling
-✅ Screenshots on Failure - Automatic failure documentation
-✅ HTML/JSON Reports - Mochawesome reporting
-✅ ESLint Integration - Code quality validation
-✅ Git Ready - .gitignore configured
+---
 
-# 📄 DOCUMENTAÇÃO INCLUÍDA
+## 📋 Scripts disponíveis
 
-1. README.md (~1200 linhas)
-   - Arquitetura detalhada
-   - Guia de instalação
-   - Explicação de cada padrão
-   - Exemplos de uso
+```bash
+npm test
+npm run cypress:open
+npm run test:headed
+npm run test:chrome
+npm run test:firefox
+npm run test:edge
+npm run test:login
+npm run lint
+npm run lint:fix
+```
 
-2. docs/estrategia-de-testes.md (~300 linhas)
-   - Estratégia de testes
-   - Seletores prioritários
-   - Assertions guidelines
-   - Performance expectations
+### Descrição dos scripts
 
-3. docs/padrao-de-nomenclatura.md (~400 linhas)
-   - Convenções CT-XXX/CTN-XXX
-   - Variáveis em camelCase
-   - Funções em verb-noun
-   - Commit message format
+- `npm test` — executa todos os testes em modo headless
+- `npm run cypress:open` — abre a interface do Cypress
+- `npm run test:headed` — executa os testes com navegador visível
+- `npm run test:chrome` — executa apenas em Chrome
+- `npm run test:firefox` — executa apenas em Firefox
+- `npm run test:edge` — executa apenas em Edge
+- `npm run test:login` — executa apenas os testes de login
+- `npm run lint` — valida a qualidade do código com ESLint
+- `npm run lint:fix` — corrige automaticamente problemas do ESLint
 
-4. docs/arquitetura.md (~500 linhas)
-   - 5-layer architecture
-   - Dependency diagram
-   - Scalability patterns
-   - Maintenance guidelines
+---
 
-# 🚀 PRÓXIMOS PASSOS
+## ✨ Práticas e padrões adotados
 
-1. Atualizar URLs e dados de teste para sua aplicação
-2. Customizar seletores [data-testid] conforme HTML real
-3. Adicionar mais módulos (usuários, produtos, etc.)
-4. Integrar com CI/CD pipeline
-5. Configurar ambiente staging/production
+- ✅ Page Object Model (POM) para encapsular a interface
+- ✅ Fixtures para centralização de dados de teste
+- ✅ Custom Commands para reutilização de ações recorrentes
+- ✅ Padrão AAA (Arrange, Act, Assert)
+- ✅ Geração dinâmica de dados para cenários variáveis
+- ✅ Tratamento de erros e validação consistente
+- ✅ Captura de screenshots em falhas
+- ✅ Relatórios HTML/JSON com Mochawesome
+- ✅ Validação de código com ESLint
+- ✅ Estrutura pronta para controle com Git
 
-# 📝 NOTA IMPORTANTE
+---
 
-Este projeto está pronto para ser utilizado como base para:
-✓ Equipes de QA profissionais
-✓ CI/CD integration
-✓ Multi-environment testing
-✓ Relatórios automatizados
-✓ Escalabilidade em larga escala
+## 📚 Documentação incluída
 
-A estrutura segue as melhores práticas de automação
-e pode ser facilmente estendida para novos módulos
-e funcionalidades.
+1. `README.md`
+   - arquitetura detalhada
+   - guia de instalação
+   - explicação dos padrões adotados
+   - exemplos de uso
+
+2. `docs/estrategia-de-testes.md`
+   - estratégia geral de automação
+   - seletores prioritários
+   - boas práticas de assertivas
+   - expectativas de desempenho
+
+3. `docs/padrao-de-nomenclatura.md`
+   - convenções CT-XXX e CTN-XXX
+   - padronização de variáveis e funções
+   - formato de commits e organização de artefatos
+
+4. `docs/arquitetura.md`
+   - visão em camadas da solução
+   - diagramas e dependências
+   - padrões de escalabilidade e manutenção
+
+---
+
+## 🚀 Próximos passos
+
+1. Ajustar URLs e dados de teste para o ambiente real da aplicação
+2. Personalizar seletores com `data-testid` conforme o HTML final
+3. Expandir para outros módulos, como usuários, produtos e checkout
+4. Integrar a automação em pipeline de CI/CD
+5. Configurar ambientes de staging e produção
+
+---
+
+## 📝 Observação final
+
+Este projeto está pronto para ser usado como base de estudo, aprendizado e referência para automação de testes com Cypress. Ele foi estruturado para demonstrar boas práticas de organização, manutenção e qualidade, além de servir como ponto de partida para projetos mais robustos e profissionais.
+
+A arquitetura adotada favorece clareza, reutilização e expansão contínua, tornando o código mais compreensível tanto para quem está começando quanto para quem precisa evoluir a automação em novos cenários.
+
+---
+
+## ✅ Status final
+
+- Estrutura completa: ✓
+- Documentação abrangente: ✓
+- Validação ESLint: ✓
+- Casos de teste executáveis: ✓
+- Base pronta para evolução: ✓
 
 ========================================
 Projeto criado com sucesso! ✨

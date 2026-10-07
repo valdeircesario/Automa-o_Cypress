@@ -1,33 +1,44 @@
-# 🚀 GUIA DE INÍCIO RÁPIDO
+# 🚀 Quick Start
 
-## 1️⃣ INSTALAÇÃO E CONFIGURAÇÃO
+> Guia rápido para configurar, executar e evoluir o projeto de automação Cypress com eficiência.
 
-### Pré-requisitos:
+## 1. Visão geral
 
-- Node.js v20+ (✅ já instalado: v20.13.1)
-- npm v10+ (✅ já instalado: v10.5.2)
+Este projeto foi estruturado para servir como base de estudo, referência e evolução em automação E2E com Cypress. Ele já inclui organização por módulos, Page Object Model, fixtures, comandos reutilizáveis e documentação técnica.
 
-### Passos:
+Antes de começar, confirme que o ambiente já está preparado:
 
-```bash
-# 1. Navegar para o projeto
-cd projetocypressteste01
-
-# 2. Instalar dependências (já feito)
-npm install
-
-# 3. Criar arquivo .env com suas credenciais
-cp .env.example .env
-
-# 4. Editar .env com dados reais
-notepad .env
-```
+- Node.js v20+
+- npm v10+
+- projeto clonado e dependências instaladas
 
 ---
 
-## 2️⃣ CONFIGURAÇÃO DO .env
+## 2. Pré-requisitos
 
-Edite o arquivo `.env` com:
+```bash
+node -v
+npm -v
+```
+
+Se estiver tudo correto, siga para a próxima etapa.
+
+---
+
+## 3. Instalação e configuração
+
+```bash
+# entrar na pasta do projeto
+cd projetocypressteste01
+
+# instalar dependências
+npm install
+
+# criar o arquivo de ambiente a partir do exemplo
+cp .env.example .env
+```
+
+Agora edite o arquivo `.env` com os valores reais do projeto:
 
 ```env
 CYPRESS_BASE_URL=http://sua-aplicacao.com
@@ -36,46 +47,48 @@ CYPRESS_PASSWORD=sua-senha
 CYPRESS_ENV=development
 ```
 
+> Ajuste os valores conforme a sua aplicação e ambiente de execução.
+
 ---
 
-## 3️⃣ EXECUTAR TESTES
+## 4. Executando testes
 
-### Opção A: Interface Gráfica (Recomendado para desenvolvimento)
+### Opção A — interface visual do Cypress
 
 ```bash
 npm run cypress:open
 ```
 
-Abre o Cypress UI onde você pode:
+Essa é a melhor opção para desenvolvimento e depuração. Você consegue:
 
-- Selecionar spec files
-- Executar testes individualmente
-- Ver resultados em tempo real
-- Usar o seletor de elementos
+- selecionar arquivos de teste
+- executar cenários individualmente
+- validar elementos em tempo real
+- analisar falhas com mais clareza
 
-### Opção B: Headless (Recomendado para CI/CD)
+### Opção B — execução headless
 
 ```bash
 npm test
 ```
 
-Executa todos os testes rapidamente sem interface
+Use essa opção em CI/CD ou em execução automatizada, sem abrir a interface gráfica.
 
-### Opção C: Com navegador visível
+### Opção C — execução com navegador visível
 
 ```bash
 npm run test:headed
 ```
 
-### Opção D: Navegador específico
+### Opção D — execução em navegadores específicos
 
 ```bash
-npm run test:chrome        # Apenas Chrome
-npm run test:firefox       # Apenas Firefox
-npm run test:edge          # Apenas Edge
+npm run test:chrome
+npm run test:firefox
+npm run test:edge
 ```
 
-### Opção E: Apenas Login
+### Opção E — executar apenas os testes de login
 
 ```bash
 npm run test:login
@@ -83,15 +96,15 @@ npm run test:login
 
 ---
 
-## 4️⃣ VALIDAÇÃO DE CÓDIGO
+## 5. Validação de código
 
-### Verificar qualidade:
+Antes de continuar ou enviar alterações, valide a qualidade do código:
 
 ```bash
 npm run lint
 ```
 
-### Corrigir automaticamente:
+Se quiser corrigir automaticamente problemas simples:
 
 ```bash
 npm run lint:fix
@@ -99,81 +112,121 @@ npm run lint:fix
 
 ---
 
-## 5️⃣ GERAR RELATÓRIOS
+## 6. Geração de relatórios
 
-Após executar os testes:
+Após os testes, você pode gerar relatórios em HTML e JSON:
 
 ```bash
 npm run test:report
 ```
 
-Abre um relatório HTML interativo em:
-`reports/mochawesome.html`
+Os artefatos ficam em:
+
+```text
+reports/
+```
+
+Esse relatório é útil para:
+
+- verificar falhas
+- acompanhar tempo de execução
+- registrar evidências do teste
+- compartilhar resultados com a equipe
 
 ---
 
-## 6️⃣ ENTENDER A ESTRUTURA
+## 7. Estrutura da automação
 
-### Onde adicionar novos testes?
+### Onde ficam os testes?
 
-```
+```text
 cypress/e2e/[modulo]/[nome].cy.js
-Exemplo: cypress/e2e/usuarios/criar-usuario.cy.js
 ```
 
-### Onde criar Page Objects?
+Exemplo:
 
+```text
+cypress/e2e/login/login.cy.js
 ```
+
+### Onde ficam os Page Objects?
+
+```text
 cypress/pages/[NomePage].js
-Exemplo: cypress/pages/UsuariosPage.js
 ```
 
-### Onde adicionar dados de teste?
+Exemplo:
 
+```text
+cypress/pages/LoginPage.js
 ```
+
+### Onde ficam os dados de teste?
+
+```text
 cypress/fixtures/[modulo].json
-Exemplo: cypress/fixtures/usuarios.json
 ```
 
-### Onde adicionar comandos customizados?
+Exemplo:
 
+```text
+cypress/fixtures/login.json
 ```
+
+### Onde ficam os comandos reutilizáveis?
+
+```text
 cypress/support/commands.js
 ```
 
+### Onde ficam funções utilitárias?
+
+```text
+cypress/utils/helpers.js
+```
+
 ---
 
-## 7️⃣ ANATOMIA DE UM TESTE
+## 8. Anatomia de um teste
 
 ```javascript
 it("CTN-001 — Login com credenciais válidas", () => {
-  // ARRANGE - Preparar dados
   cy.fixture("login.json").then((dados) => {
-    // ACT - Executar ações
+    // ARRANGE
+    const usuario = dados.usuarioValido.usuario;
+    const senha = dados.usuarioValido.senha;
+
+    // ACT
     loginPage.visit();
-    loginPage.preencherUsuario(dados.usuarioValido.usuario);
-    loginPage.preencherSenha(dados.usuarioValido.senha);
+    loginPage.preencherUsuario(usuario);
+    loginPage.preencherSenha(senha);
     loginPage.clicarEntrar();
 
-    // ASSERT - Validar resultados
+    // ASSERT
     loginPage.validarLoginRealizado();
     cy.url().should("not.include", "/login");
   });
 });
 ```
 
+Esse padrão segue a abordagem AAA:
+
+- Arrange: prepara os dados e o cenário
+- Act: executa a ação principal
+- Assert: valida o resultado esperado
+
 ---
 
-## 8️⃣ MODIFICAR SELETORES
+## 9. Ajustando seletores
 
-Se os seletores não funcionarem com sua aplicação:
+Caso a aplicação tenha mudado e os seletores não funcionem mais:
 
-1. Abrir o Cypress: `npm run cypress:open`
-2. Clicar em "Select element" (ícone de alvo)
-3. Clicar no elemento na tela
-4. Copiar o seletor sugerido
-5. Editar `cypress/pages/LoginPage.js`
-6. Substituir no getter correspondente:
+1. execute `npm run cypress:open`
+2. use o seletor visual do Cypress
+3. identifique o novo elemento
+4. ajuste o getter ou método correspondente em `cypress/pages`
+
+Exemplo:
 
 ```javascript
 // Antes
@@ -183,110 +236,83 @@ get usuarioInput() {
 
 // Depois
 get usuarioInput() {
-  return cy.get('[data-testid="input-usuario-login"]'); // novo seletor
+  return cy.get('[data-testid="input-usuario-login"]');
 }
 ```
 
 ---
 
-## 9️⃣ ADICIONAR NOVO MÓDULO
+## 10. Adicionando um novo módulo
 
-### Exemplo: Criar testes para "Usuários"
+### Exemplo: usuários
 
-**1. Criar Page Object**
-
-```bash
-# Criar: cypress/pages/UsuariosPage.js
-```
-
-**2. Criar Fixtures**
-
-```bash
-# Criar: cypress/fixtures/usuarios.json
-```
-
-**3. Criar Test Cases**
-
-```bash
-# Criar: docs/casos-de-teste/CT-002-usuarios.md
-```
-
-**4. Criar Scenarios**
-
-```bash
-# Criar: docs/cenarios-de-teste/usuarios/CTN-001.md
-```
-
-**5. Criar Tests**
-
-```bash
-# Criar: cypress/e2e/usuarios/usuarios.cy.js
-```
+1. criar a página de objeto em `cypress/pages/UsuariosPage.js`
+2. criar o fixture em `cypress/fixtures/usuarios.json`
+3. criar os casos de teste em `docs/casos-de-teste/`
+4. criar cenários em `docs/cenarios-de-teste/`
+5. criar os testes em `cypress/e2e/usuarios/usuarios.cy.js`
 
 ---
 
-## 🔟 TROUBLESHOOTING
+## 11. Troubleshooting
 
 ### Erro: "Can't find spec file"
 
-- Verificar caminho do arquivo
-- Confirmar extensão .cy.js
-- Verificar pasta cypress/e2e
+- confira o caminho do arquivo
+- verifique a extensão `.cy.js`
+- confirme que ele está dentro de `cypress/e2e`
 
 ### Erro: "Element not found"
 
-- Validar seletor com `npm run cypress:open`
-- Verificar se elemento está visível
-- Usar `cy.wait()` se necessário
+- valide o seletor no navegador
+- use o Cypress UI para inspecionar o elemento
+- verifique se o componente está visível antes da ação
 
 ### Erro: "Credentials invalid"
 
-- Verificar arquivo .env
-- Validar dados em cypress/fixtures/
-- Testar login manual na aplicação
+- revise o arquivo `.env`
+- confirme os valores em `cypress/fixtures`
+- teste o login manualmente na aplicação
 
-### Testes muito lentos?
+### Testes lentos
 
-- Aumentar timeouts em cypress.config.js
-- Usar `cy.waitForStable()` em elementos dinâmicos
-- Considerar Lighthouse audits
-
----
-
-## 📞 DÚVIDAS FREQUENTES
-
-**P: Como debug um teste?**
-A: Use `cy.pause()` ou clique em "Step" no Cypress UI
-
-**P: Como tomar screenshot?**
-A: Use `cy.screenshot('nome')` ou será automático em falha
-
-**P: Como usar dados dinâmicos?**
-A: Veja `cypress/utils/helpers.js` para `dataGenerator`
-
-**P: Como esperar elemento aparecer?**
-A: Use `cy.get().should('exist')` com timeout
-
-**P: Como rodar em CI/CD?**
-A: Use `npm test` em seu pipeline (GitHub Actions, Jenkins, etc)
+- ajuste timeouts em `cypress.config.js`
+- use esperas mais assertivas com `should()`
+- evite overuse de waits manuais
 
 ---
 
-## 📚 RECURSOS ADICIONAIS
+## 12. Dúvidas frequentes
 
-- [Documentação Cypress](https://docs.cypress.io)
-- [README.md](./README.md) - Documentação completa
-- [estrategia-de-testes.md](./docs/estrategia-de-testes.md) - Padrões
-- [padrao-de-nomenclatura.md](./docs/padrao-de-nomenclatura.md) - Convenções
-- [arquitetura.md](./docs/arquitetura.md) - Arquitetura
+**Como depurar um teste?**
+Use `cy.pause()` ou o modo step-by-step no Cypress UI.
+
+**Como capturar screenshot?**
+Use `cy.screenshot('nome-do-arquivo')` ou deixe o Cypress capturar automaticamente em falhas.
+
+**Como usar dados dinâmicos?**
+Consulte `cypress/utils/helpers.js` para helpers e geração de dados.
+
+**Como executar em CI/CD?**
+Use o comando `npm test` no pipeline da sua ferramenta de integração contínua.
 
 ---
 
-## ✨ Você está pronto!
+## 13. Recursos úteis
 
-1. Configure o `.env`
-2. Execute `npm run cypress:open`
-3. Clique em `cypress/e2e/login/login.cy.js`
-4. Veja os 5 testes de Login em ação! 🎯
+- [Documentação oficial do Cypress](https://docs.cypress.io)
+- [README.md](./README.md)
+- [docs/estrategia-de-testes.md](./docs/estrategia-de-testes.md)
+- [docs/padrao-de-nomenclatura.md](./docs/padrao-de-nomenclatura.md)
+- [docs/arquitetura.md](./docs/arquitetura.md)
 
-Bom teste! 🚀
+---
+
+## 14. Próximo passo
+
+1. configure o arquivo `.env`
+2. execute `npm run cypress:open`
+3. selecione o arquivo de login
+4. acompanhe os 5 testes em ação
+
+Pronto para começar! 🚀
